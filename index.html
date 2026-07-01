@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Every Woman I Have Ever Been</title>
     <style>
-        /* Import elegant, classic serif fonts */
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap');
 
         :root {
-            --bg-color: #12100e;
-            --paper-color: #2c2520;
+            --bg-color: #110e0c;
+            --paper-color: #1e1814;
             --text-color: #e6dfd3;
             --accent-gold: #c5a880;
-            --muted-text: #a89f91;
-            --border-color: #4a3f35;
+            --muted-text: #8c7e6e;
+            --border-color: #3a3026;
         }
 
         body {
@@ -28,15 +27,31 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            background-image: radial-gradient(circle, rgba(44,37,32,0.3) 0%, rgba(18,16,14,1) 80%);
+            background-image: radial-gradient(circle, rgba(38,30,25,0.4) 0%, rgba(17,14,12,1) 80%);
+            position: relative;
         }
 
-        /* Header / Book Spine styling */
+        /* --- GOLDEN DOODLES (CSS Sparkles/Stars scattered around) --- */
+        .doodle {
+            position: absolute;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            opacity: 0.25;
+            pointer-events: none;
+            user-select: none;
+        }
+        .doodle-1 { top: 10%; left: 8%; font-size: 2rem; }
+        .doodle-2 { top: 15%; right: 10%; font-size: 1.5rem; }
+        .doodle-3 { bottom: 15%; left: 5%; font-size: 2.5rem; }
+        .doodle-4 { bottom: 20%; right: 7%; font-size: 1.8rem; }
+
         header {
             text-align: center;
             margin-top: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding: 0 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -45,7 +60,7 @@
             color: var(--accent-gold);
             letter-spacing: 4px;
             margin-bottom: 0.5rem;
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.9);
         }
 
         .subtitle {
@@ -55,13 +70,62 @@
             letter-spacing: 1px;
         }
 
-        /* Interactive Props: The Ledger / Journal Nav */
+        /* --- INTERACTIVE VINTAGE CANDLE ART --- */
+        .candle-container {
+            margin: 1rem 0 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .candle {
+            background: linear-gradient(to right, #7a291d, #a63a2b, #541910);
+            width: 16px;
+            height: 50px;
+            border-radius: 3px / 6px;
+            position: relative;
+            box-shadow: inset 2px 0 5px rgba(255,255,255,0.1), inset -2px 0 5px rgba(0,0,0,0.5);
+        }
+        .wick {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: #222;
+            top: -10px;
+            left: 7px;
+        }
+        .flame {
+            position: absolute;
+            background: radial-gradient(ellipse at bottom, #ffea00 0%, #ff7700 50%, transparent 100%);
+            width: 12px;
+            height: 24px;
+            top: -32px;
+            left: 2px;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 10px #ff7700, 0 0 20px #ff3300;
+            animation: flicker 0.15s infinite alternate;
+        }
+        .base {
+            width: 34px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 5px;
+            margin-top: -2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
+            100% { transform: scale(1.05) rotate(1deg); opacity: 1; }
+        }
+
+        /* Navigation */
         .journal-nav {
             display: flex;
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
             justify-content: center;
+            z-index: 2;
         }
 
         .nav-prop {
@@ -72,43 +136,49 @@
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
             cursor: pointer;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.4);
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.4);
             transition: all 0.4s ease;
             position: relative;
         }
 
         .nav-prop::before {
-            content: '';
+            content: '✦';
             position: absolute;
-            left: 5px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--accent-gold);
-            opacity: 0.5;
+            left: 6px;
+            color: var(--accent-gold);
+            font-size: 0.6rem;
+            opacity: 0.4;
+            top: 35%;
         }
 
         .nav-prop:hover, .nav-prop.active {
             color: var(--accent-gold);
             border-color: var(--accent-gold);
-            transform: translateY(-3px);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.7), inset 0 0 15px rgba(197,168,128,0.2);
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.8);
         }
 
-        /* The Main Book Display */
-        .book-container {
+        /* --- TWO-COLUMN WORKSPACE LAYOUT --- */
+        .workspace {
+            display: flex;
             width: 90%;
-            max-width: 650px;
-            background: #231c17;
+            max-width: 1050px;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+            z-index: 2;
+        }
+
+        /* Left Side: The Book Frame for Poems */
+        .book-container {
+            flex: 1.2;
+            background: #191411;
             border: 2px solid var(--border-color);
             padding: 3rem 2.5rem;
             box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
             position: relative;
-            margin-bottom: 4rem;
             border-radius: 2px;
         }
 
-        /* Elegant inner border border */
         .book-container::after {
             content: '';
             position: absolute;
@@ -116,16 +186,68 @@
             bottom: 10px;
             left: 10px;
             right: 10px;
-            border: 1px solid rgba(197, 168, 128, 0.15);
+            border: 1px solid rgba(197, 168, 128, 0.12);
             pointer-events: none;
         }
 
-        /* Poem Container Animations */
+        /* Right Side: The Photo Gallery Panel */
+        .gallery-container {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .photo-slot {
+            width: 100%;
+            height: 180px;
+            background-color: #15110e;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .photo-slot:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-gold);
+        }
+
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+            filter: sepia(0.5) contrast(1.1) brightness(0.8);
+            transition: opacity 0.4s ease;
+        }
+
+        .photo-slot:hover img {
+            opacity: 0.95;
+        }
+
+        /* Elegant label placeholder inside photo boxes */
+        .photo-placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-translate(-50%, -50%));
+            width: 100%;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--muted-text);
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
+
+        /* Poem Section Animations */
         .poem-section {
             display: none;
             opacity: 0;
             transform: translateY(15px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .poem-section.active {
@@ -144,190 +266,244 @@
         }
 
         .poem-body {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             line-height: 1.8;
             white-space: pre-line;
             text-align: center;
-            letter-spacing: 0.5px;
             color: #ece5da;
         }
 
-        /* Typewriter font accent for footnotes/stamps */
         .library-stamp {
             font-family: 'Special Elite', monospace;
-            font-size: 0.8rem;
-            color: #5c4d41;
-            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: #4a3e34;
             position: absolute;
             bottom: 15px;
             right: 25px;
             letter-spacing: 2px;
         }
 
-        /* Custom Scrollbar for Dark Academia feel */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-gold);
+        /* Gallery Groups Logic */
+        .gallery-group {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: 100%;
         }
 
-        @media (max-width: 600px) {
-            .book-container {
-                padding: 2rem 1.2rem;
+        .gallery-group.active {
+            display: flex;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 850px) {
+            .workspace {
+                flex-direction: column;
             }
-            h1 {
-                font-size: 1.8rem;
+            .gallery-container {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
-            .poem-body {
-                font-size: 1rem;
+            .photo-slot {
+                flex: 1;
+                min-width: 150px;
+                height: 150px;
             }
         }
     </style>
 </head>
 <body>
 
+    <div class="doodle doodle-1">✦</div>
+    <div class="doodle doodle-2">✧</div>
+    <div class="doodle doodle-3">✧</div>
+    <div class="doodle doodle-4">✦</div>
+
     <header>
         <h1>To Every Woman I Have Ever Been</h1>
         <div class="subtitle">An Anthology of Shadow, Verse, and Triumph</div>
     </header>
 
+    <div class="candle-container" onclick="document.getElementById('candle-flame').toggleAttribute('hidden')" title="Click to blow out candle">
+        <div class="candle">
+            <div class="wick"></div>
+            <div id="candle-flame" class="flame"></div>
+        </div>
+        <div class="base"></div>
+    </div>
+
     <nav class="journal-nav" aria-label="Poem Selection">
-        <button class="nav-prop active" onclick="openPoem(event, 'lotus')">I. The Lotus Flower</button>
-        <button class="nav-prop" onclick="openPoem(event, 'reader')">II. The Reader</button>
-        <button class="nav-prop" onclick="openPoem(event, 'fighter')">III. The Fighter</button>
+        <button class="nav-prop active" onclick="openPoem(event, 'lotus', 'gallery-lotus')">I. The Lotus Flower</button>
+        <button class="nav-prop" onclick="openPoem(event, 'reader', 'gallery-reader')">II. The Reader</button>
+        <button class="nav-prop" onclick="openPoem(event, 'fighter', 'gallery-fighter')">III. The Fighter</button>
     </nav>
 
-    <main class="book-container">
+    <main class="workspace">
         
-        <article id="lotus" class="poem-section active">
-            <h2 class="poem-title">The Lotus Flower</h2>
-            <div class="poem-body">
-                Upon the asphalt fen where shadows brood,
-                And noxious vapors choked the solitude,
-                There dwelt a bud whom malice sought to bind,
-                In stagnation’s heavy vault confined.
+        <section class="book-container">
+            
+            <article id="lotus" class="poem-section active">
+                <h2 class="poem-title">The Lotus Flower</h2>
+                <div class="poem-body">
+                    Upon the asphalt fen where shadows brood,
+                    And noxious vapors choked the solitude,
+                    There dwelt a bud whom malice sought to bind,
+                    In stagnation’s heavy vault confined.
 
-                Yet didst thou rise, O Lotus of the stream,
-                From turgid depths to catch the solar gleam;
-                Unharmed by rancor, unprofaned by blight,
-                Thy petals drank the uncorrupted light.
+                    Yet didst thou rise, O Lotus of the stream,
+                    From turgid depths to catch the solar gleam;
+                    Unharmed by rancor, unprofaned by blight,
+                    Thy petals drank the uncorrupted light.
 
-                The iron edicts of a dotard age
-                Sought to immure thee in a gilded cage
-                To clip the pinions of thy soaring thought,
-                And shape thy spirit as the synod taught.
+                    The iron edicts of a dotard age
+                    Sought to immure thee in a gilded cage
+                    To clip the pinions of thy soaring thought,
+                    And shape thy spirit as the synod taught.
 
-                But lo! Thy doughty resolve did disdain
-                The craven bondage of a custom vain;
-                With silent might, the ancient bars were rent,
-                Thy sovereign will became thy battlement.
+                    But lo! Thy doughty resolve did disdain
+                    The craven bondage of a custom vain;
+                    With silent might, the ancient bars were rent,
+                    Thy sovereign will became thy battlement.
 
-                No longer captive to the miasma’s spite,
-                Thou stand’st a pharos in the fading night.
-                Wondrous and wild, yet tranquil in thy grace,
-                Time hath no power thy splendor to efface.
+                    No longer captive to the miasma’s spite,
+                    Thou stand’st a pharos in the fading night.
+                    Wondrous and wild, yet tranquil in thy grace,
+                    Time hath no power thy splendor to efface.
 
-                Thy triumph sings where bitter waters flow:
-                A soul unvanquished by the world below.
+                    Thy triumph sings where bitter waters flow:
+                    A soul unvanquished by the world below.
+                </div>
+            </article>
+
+            <article id="reader" class="poem-section">
+                <h2 class="poem-title">The Reader</h2>
+                <div class="poem-body">
+                    Beneath the vault where restless mortals chide,
+                    And worldly tempests vex the fleeting tide,
+                    She seeks a sanctuary dim and deep,
+                    Where unremembered kings their vigils keep.
+
+                    Within the narrow cloister of her nook,
+                    She yields her spirit to the open book;
+                    And with a single breath, the world forsakes,
+                    As in her breast a thousand lifetimes wakes.
+
+                    She is the mariner on starless seas,
+                    The phantom drifting on an evening breeze;
+                    She wears the crown, she bears the exile’s grief,
+                    And reaps a century in every leaf.
+
+                    The phantom cares of earth dissolve to dust,
+                    Its transient glory and its hollow trust;
+                    For in the quiet shadow of her seat,
+                    The thrum of empires stays its rushing feet.
+
+                    Here, unperceived by envy’s blinded eye,
+                    She sheds the mask and lets the phantom die.
+                    No longer bound by custom’s rigid art,
+                    She breathes the unfiltered language of the heart.
+
+                    A sovereign exile from the present age,
+                    She finds her freedom on the boundless page.
+                </div>
+            </article>
+
+            <article id="fighter" class="poem-section">
+                <h2 class="poem-title">The Fighter</h2>
+                <div class="poem-body">
+                    Against the fury of the gathering gale,
+                    Where lesser hearts did falter and grow pale,
+                    She stood unbowed, a citadel of might,
+                    Shielding her purpose through the longest night.
+
+                    Though malice sought to cast its shadow down,
+                    And bitter envy schemed to steal her crown,
+                    No petty tyrant could her spirit tame,
+                    Nor dim the luster of her rising name.
+
+                    Through trial’s fire she forged her destiny,
+                    And climbed the apex of her victory;
+                    Yet as the plaudits echoed through the skies,
+                    No haughty pride unhallowed her calm eyes.
+
+                    For greatness did not steel her heart to stone,
+                    Nor make her mock the paths that she had known;
+                    She wore her triumph like a mantle light,
+                    Most grandly sovereign in her gentle might.
+
+                    The mocking whispers of the cruel throng
+                    Were swallowed by the triumph of her song.
+                    An icon carved from resilience and grace,
+                    Time cannot mar, nor vanity efface;
+
+                    For she who conquered every foe and hill,
+                    Remains the noblest, being humble still.
+                </div>
+            </article>
+
+            <div class="library-stamp">MCMXXVI • ARCHIVE</div>
+        </section>
+
+        <section class="gallery-container">
+            
+            <div id="gallery-lotus" class="gallery-group active">
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600" alt="Dark Nature Bloom">
+                </div>
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=600" alt="Vintage architecture shadow">
+                </div>
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=600" alt="Light piercing darkness">
+                </div>
             </div>
-        </article>
 
-        <article id="reader" class="poem-section">
-            <h2 class="poem-title">The Reader</h2>
-            <div class="poem-body">
-                Beneath the vault where restless mortals chide,
-                And worldly tempests vex the fleeting tide,
-                She seeks a sanctuary dim and deep,
-                Where unremembered kings their vigils keep.
-
-                Within the narrow cloister of her nook,
-                She yields her spirit to the open book;
-                And with a single breath, the world forsakes,
-                As in her breast a thousand lifetimes wakes.
-
-                She is the mariner on starless seas,
-                The phantom drifting on an evening breeze;
-                She wears the crown, she bears the exile’s grief,
-                And reaps a century in every leaf.
-
-                The phantom cares of earth dissolve to dust,
-                Its transient glory and its hollow trust;
-                For in the quiet shadow of her seat,
-                The thrum of empires stays its rushing feet.
-
-                Here, unperceived by envy’s blinded eye,
-                She sheds the mask and lets the phantom die.
-                No longer bound by custom’s rigid art,
-                She breathes the unfiltered language of the heart.
-
-                A sovereign exile from the present age,
-                She finds her freedom on the boundless page.
+            <div id="gallery-reader" class="gallery-group">
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=600" alt="Old dusty book">
+                </div>
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600" alt="Library shadows">
+                </div>
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=600" alt="Stacked vintage paper pages">
+                </div>
             </div>
-        </article>
 
-        <article id="fighter" class="poem-section">
-            <h2 class="poem-title">The Fighter</h2>
-            <div class="poem-body">
-                Against the fury of the gathering gale,
-                Where lesser hearts did falter and grow pale,
-                She stood unbowed, a citadel of might,
-                Shielding her purpose through the longest night.
-
-                Though malice sought to cast its shadow down,
-                And bitter envy schemed to steal her crown,
-                No petty tyrant could her spirit tame,
-                Nor dim the luster of her rising name.
-
-                Through trial’s fire she forged her destiny,
-                And climbed the apex of her victory;
-                Yet as the plaudits echoed through the skies,
-                No haughty pride unhallowed her calm eyes.
-
-                For greatness did not steel her heart to stone,
-                Nor make her mock the paths that she had known;
-                She wore her triumph like a mantle light,
-                Most grandly sovereign in her gentle might.
-
-                The mocking whispers of the cruel throng
-                Were swallowed by the triumph of her song.
-                An icon carved from resilience and grace,
-                Time cannot mar, nor vanity efface;
-
-                For she who conquered every foe and hill,
-                Remains the noblest, being humble still.
+            <div id="gallery-fighter" class="gallery-group">
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?q=80&w=600" alt="Stormy dark sea waves">
+                </div>
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=600" alt="An antique broken iron structure">
+                </div>
+                <div class="photo-slot">
+                    <img src="https://images.unsplash.com/photo-1455587734955-081b22074882?q=80&w=600" alt="Tranquil fog dawn forest">
+                </div>
             </div>
-        </article>
 
-        <div class="library-stamp">• </div>
+        </section>
     </main>
 
     <script>
-        function openPoem(evt, poemId) {
+        function openPoem(evt, poemId, galleryId) {
             // Hide all poems
             const poemSections = document.querySelectorAll('.poem-section');
-            poemSections.forEach(section => {
-                section.classList.remove('active');
-            });
+            poemSections.forEach(section => section.classList.remove('active'));
 
-            // Remove active status from all interactive props
+            // Remove active decoration from nav items
             const navProps = document.querySelectorAll('.nav-prop');
-            navProps.forEach(prop => {
-                prop.classList.remove('active');
-            });
+            navProps.forEach(prop => prop.classList.remove('active'));
 
-            // Show the targeted poem with transition
-            const targetPoem = document.getElementById(poemId);
-            targetPoem.classList.add('active');
+            // Hide all picture gallery sets
+            const galleryGroups = document.querySelectorAll('.gallery-group');
+            galleryGroups.forEach(group => group.classList.remove('active'));
+
+            // Show selected poem and its distinct photo column set
+            document.getElementById(poemId).classList.add('active');
+            document.getElementById(galleryId).classList.add('active');
             
-            // Highlight the clicked interactive prop
+            // Highlight active button
             evt.currentTarget.classList.add('active');
         }
     </script>
